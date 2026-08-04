@@ -1,13 +1,13 @@
-# Task
+# Lab-1
 Refer to the topology. All physical cabling is in place. Configure a local user account, a Named ACL (NACL), and security.
 
-<center>
+<p align="center">
   <img width="300" alt="Local Account, Named ACL, and Security" src="https://github.com/user-attachments/assets/783a0b55-ffd5-49d8-90c6-859cf0e83862" />
-</center>
+</p>
 
 ## Task 1
 ```
-Configure a local account on Sw101 with telnet access only on virtual ports 0-4. Use the following information:
+Configure a local account on SW1 with telnet access only on virtual ports 0-4. Use the following information:
 • Username: support
 • Password: max2learn
 • Privilege level: Exec mode
@@ -15,7 +15,7 @@ Configure a local account on Sw101 with telnet access only on virtual ports 0-4.
 
 ## Task 2
 ```
-Configure and apply a single NACL on Sw101 using the following:
+Configure and apply a single NACL on SW1 using the following:
 • Name: ENT_ACL
 • Restrict only PC2 on VLAN 200 from pinging PC1 
 • Allow only PC2 on VLAN 200 to telnet to Sw101 
@@ -25,7 +25,7 @@ Configure and apply a single NACL on Sw101 using the following:
 
 ## Task 3
 ```
-Configure security on interface Ethernet 0/0 of Sw102:
+Configure security on interface Ethernet 0/0 of SW2:
 • Set the maximum number of secure MAC addresses to four.
 • Drop packets with unknown source addresses until the number of secure MAC addresses drops below the
 configured maximum value. No notification action is required.
@@ -54,29 +54,18 @@ ip route 192.168.100.0 255.255.255.0 192.168.3.2
 ip route 192.168.200.0 255.255.255.0 192.168.3.2
 !
 end
+write memory
+copy running-config startup-config
 ```
-
-## SW1 — inter-VLAN routing, Task 1 (local account), Task 2 (NACL)
+## SW1
 ```
 hostname SW1
-!
-username support privilege 1 secret max2learn
-!
-line vty 0 4
- login local
- transport input telnet
 !
 ip routing
 !
 vlan 100
 !
 vlan 200
-!
-ip access-list extended ENT_ACL
- deny icmp host 192.168.200.10 host 192.168.100.10 echo
- permit tcp host 192.168.200.10 host 192.168.200.1 eq 23
- deny tcp 192.168.200.0 0.0.0.255 host 192.168.200.1 eq 23
- permit ip any any
 !
 interface Ethernet0/0
  description Link to PC1
@@ -101,15 +90,15 @@ interface Vlan100
 !
 interface Vlan200
  ip address 192.168.200.1 255.255.255.0
- ip access-group ENT_ACL in
 !
 ip route 0.0.0.0 0.0.0.0 192.168.3.1
 !
-
 end
+write memory
+copy running-config startup-config
 ```
 
-## SW2 — Task 3 (port security on the PC2 port)
+## SW2
 ```
 hostname SW2
 !
@@ -119,9 +108,6 @@ interface Ethernet0/0
  description Link to PC2
  switchport mode access
  switchport access vlan 200
- switchport port-security
- switchport port-security maximum 4
- switchport port-security violation protect
  no shutdown
 !
 interface Ethernet0/1
@@ -131,8 +117,10 @@ interface Ethernet0/1
  no shutdown
 !
 end
-```
+write memory
+copy running-config startup-config
 
+```
 ## PC1 / PC2 (VPCS)
 ```
 PC1> ip 192.168.100.10/24 192.168.100.1
@@ -141,4 +129,49 @@ PC1> save
 PC2> ip 192.168.200.10/24 192.168.200.1
 PC2> save
 ```
+
+---
+
+## Task 1: Local Account
+### SW1
+```
+username support privilege 1 secret max2learn
+!
+line vty 0 4
+ login local
+ transport input telnet
+!
+```
+
+## Task 2: Named ACL
+### SW1
+```
+ip access-list extended ENT_ACL
+ deny icmp host 192.168.200.10 host 192.168.100.10 echo
+ permit tcp host 192.168.200.10 host 192.168.200.1 eq 23
+ deny tcp 192.168.200.0 0.0.0.255 host 192.168.200.1 eq 23
+ permit ip any any
+!
+interface Vlan200
+ ip access-group ENT_ACL in
+!
+end
+write memory
+copy running-config startup-config
+```
+
+## Task 3: Port Security on PC Port 2
+### SW2 
+```
+interface Ethernet0/0
+ switchport port-security
+ switchport port-security maximum 4
+ switchport port-security violation protect
+!
+end
+write memory
+copy running-config startup-config
+```
+
+
 
