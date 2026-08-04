@@ -65,7 +65,7 @@ ip dhcp pool VLAN20_POOL
  default-router 192.168.20.1
 !
 ip access-list extended CORP_ACL
- 1000 permit ip any any
+ permit ip any any
 !
 interface Ethernet0/0
  ip access-group CORP_ACL in
