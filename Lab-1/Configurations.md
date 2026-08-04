@@ -2,7 +2,7 @@
 Refer to the topology. All physical cabling is in place. Configure a local user account, a Named ACL (NACL), and security.
 
 <p align="center">
-  <img width="300" alt="Local Account, Named ACL, and Security" src="Local%20Account%2C%20Named%20ACL%2C%20and%20Security.png" />
+  <img width="300" alt="Local Account, Named ACL, and Security" src="Lab-1 Topology.png" />
 </p>
 
 ## Task 1
