@@ -1,9 +1,9 @@
 # Task
 Refer to the topology. All physical cabling is in place. Configure a local user account, a Named ACL (NACL), and security.
 
-<div style="text-align: center;">
-  <img width="300" height="auto" alt="Local Account, Named ACL, and Security" src="https://github.com/user-attachments/assets/783a0b55-ffd5-49d8-90c6-859cf0e83862" />
-</div>
+<center>
+  <img width="300" alt="Local Account, Named ACL, and Security" src="https://github.com/user-attachments/assets/783a0b55-ffd5-49d8-90c6-859cf0e83862" />
+</center>
 
 ## Task 1
 ```
