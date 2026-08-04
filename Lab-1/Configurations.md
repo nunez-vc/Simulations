@@ -87,9 +87,11 @@ interface Ethernet0/2
 !
 interface Vlan100
  ip address 192.168.100.1 255.255.255.0
+ no shutdown
 !
 interface Vlan200
  ip address 192.168.200.1 255.255.255.0
+ no shutdown
 !
 ip route 0.0.0.0 0.0.0.0 192.168.3.1
 !
