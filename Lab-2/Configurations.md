@@ -7,7 +7,7 @@ Refer to the topology. All physical cabling is in place. Configure a Local User 
 
 ## Task 1
 ```
-Configure a local account on Gw1 with telnet access only on virtual ports 0-4. Use the following information:
+Configure a local account on GW1 with telnet access only on virtual ports 0-4. Use the following information:
 • Username: wheel
 • Password: lock3path
 • Algorithm type: Scrypt
@@ -16,7 +16,7 @@ Configure a local account on Gw1 with telnet access only on virtual ports 0-4. U
 
 ## Task 2
 ```
-Configure and apply a NACL on Gw1 to control network traffic from VLAN 10:
+Configure and apply a NACL on GW1 to control network traffic from VLAN 10:
 • Name: CORP_ACL
 • Allow BOOTP and HTTPS
 • Restrict all other traffic and log the ingress interface, source MAC address, the packetʼs source and destination IP
@@ -118,10 +118,12 @@ interface Ethernet1/0
 interface Vlan10
  ip address 192.168.10.1 255.255.255.0
  ip helper-address 192.168.1.1
+ no shutdown
 !
 interface Vlan20
  ip address 192.168.20.1 255.255.255.0
  ip helper-address 192.168.1.1
+ no shutdown
 !
 ip route 0.0.0.0 0.0.0.0 192.168.1.1
 !
@@ -217,10 +219,10 @@ line vty 0 4
 ## Task 2: Named ACL policy to control network traffic from VLAN 10 on GW1
 ```
 ip access-list extended CORP_ACL
- 10 permit udp 192.168.10.0 0.0.0.255 any eq bootps
- 20 permit udp 192.168.10.0 0.0.0.255 any eq bootpc
- 30 permit tcp 192.168.10.0 0.0.0.255 any eq 443
- 40 deny ip 192.168.10.0 0.0.0.255 any log-input
+ permit udp 192.168.10.0 0.0.0.255 any eq bootps
+ permit udp 192.168.10.0 0.0.0.255 any eq bootpc
+ permit tcp 192.168.10.0 0.0.0.255 any eq 443
+ deny ip 192.168.10.0 0.0.0.255 any log-input
 !
 end
 write memory
