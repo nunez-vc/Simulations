@@ -111,7 +111,7 @@ interface Ethernet0/0
  no shutdown
 !
 interface Ethernet0/1
- description Trunk to Sw101
+ description Trunk to SW1
  switchport trunk encapsulation dot1q
  switchport mode trunk
  no shutdown
