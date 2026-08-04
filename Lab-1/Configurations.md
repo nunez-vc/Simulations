@@ -29,17 +29,9 @@ configured maximum value. No notification action is required.
 ```
 
 # Device Pre-configs: Local Account, NACL, Port Security Lab
-
-**Assumptions (adjust if your lab already has these set differently):**
-- SW1 = Sw101 (L3 distro switch, closest to R1) · SW2 = Sw102 (L2 access switch)
-- VLAN 100 gateway (Sw101 SVI) = `192.168.100.1` · VLAN 200 gateway (Sw101 SVI) = `192.168.200.1`
-- R1↔Sw101 link: R1 = `192.168.3.1`, Sw101 = `192.168.3.2`
-- R1↔INTERNET link: R1 = `209.165.201.2`, far side = `209.165.201.1`
-
 ---
 
 ## R1
-
 ```
 hostname R1
 !
@@ -60,25 +52,27 @@ ip route 192.168.200.0 255.255.255.0 192.168.3.2
 end
 ```
 
-## Sw101 (SW1) — inter-VLAN routing, Task 1 (local account), Task 2 (NACL)
-
+## SW1 — inter-VLAN routing, Task 1 (local account), Task 2 (NACL)
 ```
-hostname Sw101
+hostname SW1
+!
+username support privilege 1 secret max2learn
+!
+line vty 0 4
+ login local
+ transport input telnet
 !
 ip routing
 !
 vlan 100
- name DATA_VLAN100
+!
 vlan 200
- name DATA_VLAN200
 !
 ip access-list extended ENT_ACL
  deny icmp host 192.168.200.10 host 192.168.100.10 echo
  permit tcp host 192.168.200.10 host 192.168.200.1 eq 23
  deny tcp 192.168.200.0 0.0.0.255 host 192.168.200.1 eq 23
  permit ip any any
-!
-username support privilege 1 secret max2learn
 !
 interface Ethernet0/0
  description Link to PC1
@@ -93,7 +87,7 @@ interface Ethernet0/1
  no shutdown
 !
 interface Ethernet0/2
- description Trunk to Sw102
+ description Trunk to SW2
  switchport trunk encapsulation dot1q
  switchport mode trunk
  no shutdown
@@ -107,20 +101,15 @@ interface Vlan200
 !
 ip route 0.0.0.0 0.0.0.0 192.168.3.1
 !
-line vty 0 4
- login local
- transport input telnet
-!
+
 end
 ```
 
-## Sw102 (SW2) — Task 3 (port security on the PC2 port)
-
+## SW2 — Task 3 (port security on the PC2 port)
 ```
-hostname Sw102
+hostname SW2
 !
 vlan 200
- name DATA_VLAN200
 !
 interface Ethernet0/0
  description Link to PC2
@@ -141,7 +130,6 @@ end
 ```
 
 ## PC1 / PC2 (VPCS)
-
 ```
 PC1> ip 192.168.100.10/24 192.168.100.1
 PC1> save
