@@ -72,6 +72,7 @@ interface Ethernet0/0
 !
 end
 write memory
+yes
 copy running-config startup-config
 ```
 
@@ -129,6 +130,7 @@ ip route 0.0.0.0 0.0.0.0 192.168.1.1
 !
 end
 write memory
+yes
 copy running-config startup-config
 ```
 
@@ -158,6 +160,7 @@ interface Ethernet0/1
 !
 end
 write memory
+yes
 copy running-config startup-config
 ```
 
@@ -187,6 +190,7 @@ interface Ethernet0/1
 !
 end
 write memory
+yes
 copy running-config startup-config
 ```
 
@@ -226,6 +230,7 @@ ip access-list extended CORP_ACL
 !
 end
 write memory
+yes
 copy running-config startup-config
 
 Note: ACL is already applied in on Ethernet0/0 in the preconfig — no re-application needed.
@@ -246,6 +251,7 @@ interface Ethernet0/1
 !
 end
 write memory
+yes
 copy running-config startup config
 ```
 
