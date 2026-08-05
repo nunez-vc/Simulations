@@ -26,11 +26,9 @@ hostname R1
 !
 interface Loopback0
  ip address 10.10.1.1 255.255.255.255
- no shutdown
 !
 interface Loopback1
  ip address 192.168.1.1 255.255.255.0
- no shutdown
 !
 interface Ethernet0/0
  description Link to R2
@@ -41,10 +39,6 @@ interface Ethernet0/1
  description Link to R3
  ip address 10.10.13.1 255.255.255.0
  no shutdown
-!
-router ospf 1
- network 10.10.12.0 0.0.0.255 area 0
- network 10.10.13.0 0.0.0.255 area 0
 !
 end
 write memory
@@ -57,25 +51,19 @@ hostname R2
 !
 interface Loopback0
  ip address 10.10.2.2 255.255.255.255
- no shutdown
 !
 interface Loopback1
  ip address 192.168.2.2 255.255.255.0
- no shutdown
 !
 interface Ethernet0/0
  description Link to R1
  ip address 10.10.12.2 255.255.255.0
  no shutdown
 !
-interface Ethernet0/1
+interface Ethernet0/2
  description Link to R3
  ip address 10.10.23.2 255.255.255.0
  no shutdown
-!
-router ospf 1
- network 10.10.12.0 0.0.0.255 area 0
- network 10.10.23.0 0.0.0.255 area 0
 !
 end
 write memory
@@ -88,25 +76,19 @@ hostname R3
 !
 interface Loopback0
  ip address 10.10.3.3 255.255.255.255
- no shutdown
 !
 interface Loopback1
  ip address 192.168.3.3 255.255.255.0
- no shutdown
 !
-interface Ethernet0/0
+interface Ethernet0/1
  description Link to R1
  ip address 10.10.13.3 255.255.255.0
  no shutdown
 !
-interface Ethernet0/1
+interface Ethernet0/2
  description Link to R2
  ip address 10.10.23.3 255.255.255.0
  no shutdown
-!
-router ospf 1
- network 10.10.13.0 0.0.0.255 area 0
- network 10.10.23.0 0.0.0.255 area 0
 !
 end
 write memory
@@ -120,6 +102,8 @@ copy running-config startup-config
 ```
 router ospf 1
  router-id 10.10.12.1
+ network 10.10.12.0 0.0.0.255 area 0
+ network 10.10.13.0 0.0.0.255 area 0
  network 192.168.1.1 0.0.0.0 area 0
 !
 interface Ethernet0/1
@@ -134,12 +118,14 @@ copy running-config startup-config
 ```
 router ospf 1
  router-id 10.10.12.2
+ network 10.10.12.0 0.0.0.255 area 0
+ network 10.10.23.0 0.0.0.255 area 0
  network 192.168.2.2 0.0.0.0 area 0
 !
 interface Ethernet0/0
  ip ospf priority 255
 !
-interface Ethernet0/1
+interface Ethernet0/2
  ip ospf priority 255
 !
 end
@@ -150,9 +136,11 @@ copy running-config startup-config
 ## R3
 ```
 router ospf 1
+ network 10.10.13.0 0.0.0.255 area 0
+ network 10.10.23.0 0.0.0.255 area 0
  network 192.168.3.3 0.0.0.0 area 0
 !
-interface Ethernet0/0
+interface Ethernet0/1
  ip ospf network point-to-point
 !
 end
