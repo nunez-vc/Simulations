@@ -2,7 +2,7 @@
 Refer to the topology. All physical cabling is in place. 
 
 <p align="center">
-  <img width="300" alt="Local Account, Named ACL, and Security" src="Lab-3.png" />
+  <img width="300" alt="Local Account, Named ACL, and Security" src="Lab-3 Topology.png" />
 </p>
 
 --- 
