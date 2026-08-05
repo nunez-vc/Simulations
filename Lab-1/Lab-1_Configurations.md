@@ -1,5 +1,5 @@
-# Lab-1
-Refer to the topology. All physical cabling is in place. Configure a local user account, a Named ACL (NACL), and security.
+# Lab-1: Local User Accounts, Named ACL, and Port Security
+Refer to the topology. All physical cabling is in place.
 
 <p align="center">
   <img width="300" alt="Local Account, Named ACL, and Security" src="Lab-1 Topology.png" />
