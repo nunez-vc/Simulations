@@ -1,4 +1,4 @@
-# Lab-2
+# Lab-3
 Refer to the topology. All physical cabling is in place. 
 
 <p align="center">
