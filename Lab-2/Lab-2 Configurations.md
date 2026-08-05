@@ -1,9 +1,11 @@
-# Lab-2
-Refer to the topology. All physical cabling is in place. Configure a Local User Accounts, Named ACL (NACL), and DHCP Snooping
+# Lab-2: Local User Accounts, Named ACL Modification, and DHCP Snooping
+Refer to the topology. All physical cabling is in place. 
 
 <p align="center">
   <img width="300" alt="Local Account, Named ACL, and Security" src="Lab-2 Topology.png" />
 </p>
+
+---
 
 ## Task 1
 ```
@@ -72,7 +74,6 @@ interface Ethernet0/0
 !
 end
 write memory
-yes
 copy running-config startup-config
 ```
 
@@ -130,7 +131,6 @@ ip route 0.0.0.0 0.0.0.0 192.168.1.1
 !
 end
 write memory
-yes
 copy running-config startup-config
 ```
 
@@ -160,7 +160,6 @@ interface Ethernet0/1
 !
 end
 write memory
-yes
 copy running-config startup-config
 ```
 
@@ -190,7 +189,6 @@ interface Ethernet0/1
 !
 end
 write memory
-yes
 copy running-config startup-config
 ```
 
@@ -230,7 +228,6 @@ ip access-list extended CORP_ACL
 !
 end
 write memory
-yes
 copy running-config startup-config
 
 Note: ACL is already applied in on Ethernet0/0 in the preconfig — no re-application needed.
@@ -251,7 +248,6 @@ interface Ethernet0/1
 !
 end
 write memory
-yes
 copy running-config startup config
 ```
 
