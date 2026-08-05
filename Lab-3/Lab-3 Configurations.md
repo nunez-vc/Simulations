@@ -5,38 +5,14 @@ Refer to the topology. All physical cabling is in place.
   <img width="300" alt="Local Account, Named ACL, and Security" src="Lab-3 Topology.png" />
 </p>
 
---- 
-
 # Task
-```
-IP connectivity and OSPF are preconfigured on all devices where necessary. Do not make any changes to the IP addressing or OSPF.
-The company policy uses connected interfaces and next hops when configuring static routes except for load balancing or
-redundancy without floating static. Connectivity must be established between subnet 172.20.20.128/25 on the Internet and the LAN
-at 192.168.0.0/24 connected to SW1:
-```
 
-## Task 1
-```
-Configure reachability to the switch SW1 LAN subnet in router R2.
-```
+IP connectivity and OSPF are preconfigured on all devices where necessary. Do not make any changes to the IP addressing or OSPF. The company policy uses connected interfaces and next hops when configuring static routes except for load balancing or redundancy without floating static. Connectivity must be established between subnet 172.20.20.128/25 on the Internet and the LAN at 192.168.0.0/24 connected to SW1:
 
-## Task 2
-```
-Configure default reachability to the Internet subnet in router R1.
-```
-
-## Task 3
-```
-Configure a single static route in router R2 to reach to the Internet subnet considering both redundant links between
-routers R1 and R2. A default route is NOT allowed in router R2.
-```
-
-## Task 4
-```
-Configure a static route in router R1 toward the switch SW1 LAN subnet where the primary link must be through Ethernet0/1,
-and the backup link must be through Ethernet0/2 using a floating route. Use the minimal administrative distance value when
-required.
-```
+1. Configure reachability to the switch SW1 LAN subnet in router R2.
+2. Configure default reachability to the Internet subnet in router R1.
+3. Configure a single static route in router R2 to reach to the Internet subnet considering both redundant links between routers R1 and R2. A default route is NOT allowed in router R2.
+4. Configure a static route in router R1 toward the switch SW1 LAN subnet where the primary link must be through Ethernet0/1, and the backup link must be through Ethernet0/2 using a floating route. Use the minimal administrative distance value when required.
 
 ---
 
@@ -72,8 +48,6 @@ router ospf 1
  end
 !
 write memory
-yes
-!
 copy running-config startup-config
 ```
 
@@ -103,8 +77,6 @@ router ospf 1
  end
 !
 write memory
-yes
-!
 copy running-config startup-config
 ```
 
@@ -128,8 +100,6 @@ router ospf 1
  end
 !
 write memory
-yes
-!
 copy running-config startup-config
 ```
 
@@ -153,8 +123,6 @@ ip routing
 end
 !
 write memory
-yes
-!
 copy running-config startup-config
 ```
 
@@ -180,4 +148,10 @@ ip route 172.20.20.128 255.255.255.128 10.10.12.1 10.10.12.129
 ```
 ip route 192.168.0.0 255.255.255.0 Ethernet0/1 10.10.12.2
 ip route 192.168.0.0 255.255.255.0 Ethernet0/2 10.10.12.130 2
+```
+
+## Note: Do not forget to save configurations
+```
+write memory
+copy running-config startup-config
 ```
