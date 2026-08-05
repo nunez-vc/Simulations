@@ -55,6 +55,7 @@ ip route 192.168.200.0 255.255.255.0 192.168.3.2
 !
 end
 write memory
+yes
 copy running-config startup-config
 ```
 ## SW1
@@ -97,6 +98,7 @@ ip route 0.0.0.0 0.0.0.0 192.168.3.1
 !
 end
 write memory
+yes
 copy running-config startup-config
 ```
 
@@ -120,6 +122,7 @@ interface Ethernet0/1
 !
 end
 write memory
+yes
 copy running-config startup-config
 
 ```
@@ -159,6 +162,7 @@ interface Vlan200
 !
 end
 write memory
+yes
 copy running-config startup-config
 ```
 
@@ -172,6 +176,7 @@ interface Ethernet0/0
 !
 end
 write memory
+yes
 copy running-config startup-config
 ```
 
