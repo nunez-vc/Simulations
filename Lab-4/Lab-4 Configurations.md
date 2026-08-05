@@ -1,4 +1,4 @@
-# Lab-4
+# Lab-4: OSPF Router ID, DR Election, and Network Types
 Refer to the topology. All physical cabling is in place. 
 
 <p align="center">
