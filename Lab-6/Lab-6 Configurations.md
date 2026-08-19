@@ -149,8 +149,8 @@ S    10.0.41.10/32 [1/0] via 10.0.12.2
 S    10.0.41.0/24 [1/0] via 10.0.13.2
 S    10.0.41.0/24 [200/0] via 10.0.12.2
 
-Note: Only the AD-1 route shows as active/installed — the AD-200 floating route exists in the static route list but won't appear as
-the selected path in show ip route (no S prefix line for it) unless the primary is down.
+Note: Only the AD-1 route shows as active/installed — the AD-200 floating route exists in the static route list but
+won't appear as the selected path in show ip route (no S prefix line for it) unless the primary is down.
 ```
 
 ## 3. Confirm R2's default route
