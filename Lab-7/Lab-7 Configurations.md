@@ -1,8 +1,8 @@
-# Lab-6
+# Lab-7
 Refer to the topology. All physical cabling is in place. 
 
 <p align="center">
-  <img width="400" alt="Local Account, Named ACL, and Security" src="Lab-7 Topology.png" />
+  <img width="600" alt="Local Account, Named ACL, and Security" src="Lab-7 Topology.png" />
 </p>
 
 ## Tasks:
