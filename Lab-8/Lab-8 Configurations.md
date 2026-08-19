@@ -23,8 +23,6 @@ protocol and ensure that E0/0 on both switches uses the Cisco proprietary protoc
 ```
 hostname SW-1
 !
-lldp run
-!
 interface Ethernet0/2
  description Trunk to R1
  switchport trunk encapsulation dot1q
@@ -43,8 +41,6 @@ end
 ## SW-2
 ```
 hostname SW-2
-!
-lldp run
 !
 interface Ethernet0/2
  description Trunk to R2
@@ -81,6 +77,8 @@ PC2> save
 vlan 15
  name OPS
 !
+lldp run
+!
 interface Ethernet0/1
  description Link to PC1
  switchport mode access
@@ -104,6 +102,8 @@ end
 ```
 vlan 66
  name ENGINEERING
+!
+lldp run
 !
 interface Ethernet0/1
  description Link to PC2
