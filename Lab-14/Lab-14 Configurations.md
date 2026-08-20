@@ -48,6 +48,26 @@ interface e0/3
  description Link to SW104
  ip address 172.16.1.21 255.255.255.252
  no shutdown
+ exit
+! Exclude static ranges for both subnets
+ip dhcp excluded-address 172.16.101.1 172.16.101.100
+ip dhcp excluded-address 172.16.102.1 172.16.102.100
+!
+! DHCP Pool for VLAN 101
+ip dhcp pool VLAN_101_POOL
+ network 172.16.101.0 255.255.255.0
+ default-router 172.16.101.1
+ dns-server 208.67.222.222 208.67.222.220
+!
+! DHCP Pool for VLAN 102
+ip dhcp pool VLAN_102_POOL
+ network 172.16.102.0 255.255.255.0
+ default-router 172.16.102.1
+ dns-server 208.67.222.222 208.67.222.220
+ exit
+!
+ip route 172.16.101.0 255.255.255.0 172.16.1.18
+ip route 172.16.102.0 255.255.255.0 172.16.1.22
 end
 ```
 
@@ -87,6 +107,13 @@ interface Vlan 101
  description Gateway for PC1 (VLAN 101)
  ip address 172.16.101.1 255.255.255.0
  no shutdown
+ exit
+!
+interface Vlan 101
+ ip helper-address 172.16.1.17
+ exit
+!
+ip route 0.0.0.0 0.0.0.0 172.16.1.5
 end
 ```
 
@@ -126,6 +153,12 @@ interface Vlan 102
  description Gateway for PC2 (VLAN 102)
  ip address 172.16.102.1 255.255.255.0
  no shutdown
+ exit
+!
+interface Vlan 102
+ ip helper-address 172.16.1.21
+exit
+ip route 0.0.0.0 0.0.0.0 172.16.1.9
 end
 ```
 
@@ -155,6 +188,10 @@ interface e0/2
  description Link to SW101
  ip address 172.16.1.5 255.255.255.252
  no shutdown
+ exit
+!
+ip route 172.16.101.0 255.255.255.0 172.16.1.6
+ip route 0.0.0.0 0.0.0.0 172.16.1.17
 end
 ```
 
@@ -184,6 +221,10 @@ interface e0/2
  description Link to SW102
  ip address 172.16.1.9 255.255.255.252
  no shutdown
+ exit
+!
+ip route 172.16.102.0 255.255.255.0 172.16.1.10
+ip route 0.0.0.0 0.0.0.0 172.16.1.21
 end
 ```
 
