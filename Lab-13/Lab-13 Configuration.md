@@ -76,16 +76,13 @@ interface port-channel 34
 
 # Verification
 ## Trunking and Native VLAN Verification
+Verify that VLAN 77 is listed as the native VLAN on the trunks and that the allowed VLAN lists on SW-1 and SW-2 match your configurations.
 ```
 show interfaces trunk
-
-Verify that VLAN 77 is listed as the native VLAN on the trunks and that the allowed VLAN lists on
-SW-1 and SW-2 match your configurations.
 ```
 
 ## LACP EtherChannel Verification
+Verify that Port-Channel 34 is in use (SU) and both member ports (E0/0 and E0/1) are bundled (P).
 ```
 show etherchannel summary
-
-Verify that Port-Channel 34 is in use (SU) and both member ports (E0/0 and E0/1) are bundled (P).
 ```
