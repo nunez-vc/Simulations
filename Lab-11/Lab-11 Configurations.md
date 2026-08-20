@@ -84,17 +84,13 @@ interface port-channel 23
 
 # Verifications
 ## Verify LACP Bundling
+Expectation: Both e0/2 and e0/3 should show a flag of (P) (bundled in port-channel) under Po23 and the port-channel state should be (RU) or (SU).
 ```
 show etherchannel summary
-
-Expectation: Both e0/2 and e0/3 should show a flag of (P) (bundled in port-channel)
-under Po23 and the port-channel state should be (RU) or (SU)
 ```
 
 ## Verify Trunking & Native VLAN
+Expectation: e0/0 and Po23 should be listed as active trunks, with e0/0 showing Native VLAN 11 and Po23 showing Native VLAN 1.
 ```
 show interfaces trunk
-
-Expectation: e0/0 and Po23 should be listed as active trunks, with e0/0 showing
-Native VLAN 11 and Po23 showing Native VLAN 1.
 ```
