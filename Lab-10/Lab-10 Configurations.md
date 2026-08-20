@@ -77,17 +77,13 @@ interface e0/1
 
 # Verification
 ## Verify EtherChannel Summary
+Expected status: Port-Channel Po12 should show flags (SU) (Layer 2, In Use) with ports e0/0 and e0/1 flagged as (P) (bundled in port-channel).
 ```
 show etherchannel summary
-
-Expected status: Port-Channel Po12 should show flags (SU) (Layer 2, In Use) with ports e0/0
-and e0/1 flagged as (P) (bundled in port-channel).
 ```
 
 ## Verify Trunk Port and Native VLAN Status
+Expected status: Po12 and e0/2 should be shown as operational trunks, with Native VLAN 35 explicitly assigned.
 ```
 show interfaces trunk
-
-Expected status: Po12 and e0/2 should be shown as operational trunks, with Native VLAN 35
-explicitly assigned.
 ```
